@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js">
+        const video = document.querySelector('#360-video');
+        const playButton = document.querySelector('#playButton');
+
+        playButton.addEventListener('click', function() {
+          video.play();
+          playButton.style.display = 'none';
+        });
+    </script>
+  </head>
+  <title>A night at SudoRoom Hardware Hack Night</title>
+  <body>
+    <button id="playButton">Play 360 Video</button>
+    <a-scene play-on-load>
+      <a-assets>
+        <video
+          id="360-video"
+          src="https://cdn.glitch.me/1ccf4995-0065-41a5-8300-146cf5a51536/sudoRoom_360.MP4?v=1722548883635"
+          autoplay
+          loop
+          crossorigin="anonymous"
+          preload="auto"
+        ></video>
+      </a-assets>
+<!--       <a-entity id="loadingScreen" position="0 1.6 -4">
+        <a-text value="Loading..." align="center" color="#000000"></a-text>
+      </a-entity> -->
+
+      <a-videosphere src="#360-video" rotation="0 180 0"></a-videosphere>
+    </a-scene>
+  </body>
+</html>

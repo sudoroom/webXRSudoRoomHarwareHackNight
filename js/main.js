@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const portal1 = document.querySelector('#portal1');
     const portal2 = document.querySelector('#portal2');
     const portal3 = document.querySelector('#portal3');
+    const textEntity = document.querySelector('a-text[value="SudoRoom & Fix-It Clinic"]');
 
     const skyboxTextures = ['#skyTexture1', '#skyTexture2', '#skyTexture3'];
     let currentTextureIndex = 0;
@@ -17,6 +18,17 @@ document.addEventListener('DOMContentLoaded', function() {
         portal1.setAttribute('visible', currentTextureIndex === 0);
         portal2.setAttribute('visible', currentTextureIndex === 1);
         portal3.setAttribute('visible', currentTextureIndex === 2);
+
+        // Update text content based on the current scene
+        if (currentTextureIndex === 1) {
+        textEntity.setAttribute('value', "Math and Art SudoRoom Visits SF Moma with Noisebridge");
+        textEntity.setAttribute('width', 8); // Increase width to accommodate longer text
+        textEntity.setAttribute('position', '-4 1 -1.5'); // Adjust position if needed
+        } else {
+            textEntity.setAttribute('value', "SudoRoom & Fix-It Clinic");
+            textEntity.setAttribute('width', 6); // Reset to original width
+            textEntity.setAttribute('position', '-2.5 1 -1.5'); // Reset to original position
+        }
     }
 
     function setupPortalListener(portal, nextTextureIndex) {

@@ -10,19 +10,21 @@
   <body>
     <a-scene pinch-handler>
       <a-assets>
-        <img id="skyTexture3"
-        src="img/sudoRoom_hardware_hack_1.jpg"></>
+        <img id="skyTexture1"
+        src="img/sudoRoom_hardware_hack_1.jpg"/>
+        <!-- kara walker - another hardware hack night -->
          <img id="skyTexture2"
           src="https://cdn.glitch.global/4f84b3a7-2196-4e68-9b5d-8d8f7c229bc8/KaraWalkerSFMoma360.jpg?v=17222a19263454"
         />
+        <!-- another hardware hack night -->
         <img
-          id="skyTexture1"
+          id="skyTexture3"
           src="https://cdn.glitch.global/c70b1072-7801-4a12-b3cf-3bb5e174019e/SudoROom.JPG?v=1722469205013"
         />
       </a-assets>
 
       <a-sky id="skybox" 
-      src="#skyTexture3" 
+      src="#skyTexture1" 
       rotation="0 0 0"></a-sky>
 
       <a-text
@@ -59,6 +61,13 @@
         ></a-text>
         </a-entity>
       </a-entity>
+      <a-entity id="portal2" class="portal" position="0 1.5 -3" visible="false"
+      geometry="primitive: circle; radius: 0.5"
+      material="color: green; opacity: 0.5"
+      event-set__enter="_event: mouseenter; material.opacity: 0.8"
+      event-set__leave="_event: mouseleave; material.opacity: 0.5">
+<a-text value="Stare here to transport" align="center" position="0 0.6 0" scale="0.5 0.5 0.5"></a-text>
+</a-entity>
 
       <a-entity position="0 1.8 2">
         <a-entity camera look-controls wasd-controls>

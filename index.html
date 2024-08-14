@@ -1,13 +1,7 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js">
-        const video = document.querySelector('#360-video');
-        const playButton = document.querySelector('#playButton');
-
-        playButton.addEventListener('click', function() {
-          video.play();
-          playButton.style.display = 'none';
-        });
+      
     </script>
        <script src="js/pinch-handler.js"></script>
        <script src="js/main.js"></script>
@@ -30,6 +24,19 @@
 <!--       <a-entity id="loadingScreen" position="0 1.6 -4">
         <a-text value="Loading..." align="center" color="#000000"></a-text>
       </a-entity> -->
+      <a-assets>
+        <img
+         id="skyTexture2"
+         src="https://cdn.glitch.global/4f84b3a7-2196-4e68-9b5d-8d8f7c229bc8/KaraWalkerSFMoma360.jpg?v=1722219263454"
+       />
+       <img
+         id="skyTexture1"
+         src="https://cdn.glitch.global/c70b1072-7801-4a12-b3cf-3bb5e174019e/SudoROom.JPG?v=1722469205013"
+       />
+     </a-assets>
+
+     <a-sky id="skybox" src="#skyTexture1" rotation="0 -100 0"></a-sky>
+
 
       <a-videosphere src="#360-video" rotation="0 180 0"></a-videosphere>
     </a-scene>

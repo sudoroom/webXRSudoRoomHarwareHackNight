@@ -1,44 +1,97 @@
 <html>
   <head>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js">
-      
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js">
+      AFRAME.registerComponent('pinch-handler', {
+        init: function() {
+          this.skyboxEl = document.querySelector('#skybox');
+          this.skyboxTextures = ['#skyTexture1', '#skyTexture2', '#skyTexture3']; // Add all your texture IDs here
+          this.currentTextureIndex = 0;
+
+          this.el.sceneEl.addEventListener('enter-vr', () => {
+            const session = this.el.sceneEl.xrSession;
+            if (session) {
+              this.setupEventListeners(session);
+            }
+          });
+        },
+
+        setupEventListeners: function(session) {
+          session.addEventListener('select', this.onSelect.bind(this));
+        },
+
+        onSelect: function(event) {
+          // Check if the input source is a transient-pointer (pinch gesture)
+          if (event.inputSource.targetRayMode === 'transient-pointer') {
+            this.changeSkybox();
+          }
+        },
+
+        changeSkybox: function() {
+          // Move to the next texture
+          this.currentTextureIndex = (this.currentTextureIndex + 1) % this.skyboxTextures.length;
+          const newTexture = this.skyboxTextures[this.currentTextureIndex];
+
+          // Change the skybox texture
+          this.skyboxEl.setAttribute('src', newTexture);
+        }
+      });
     </script>
-       <script src="js/pinch-handler.js"></script>
-       <script src="js/main.js"></script>
-       <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
   </head>
-  <title>A night at SudoRoom Hardware Hack Night</title>
   <body>
-    <button id="playButton">Play 360 Video</button>
-    <a-scene play-on-load>
+    <a-scene pinch-handler>
       <a-assets>
-        <video
-          id="360-video"
-          src="https://cdn.glitch.me/1ccf4995-0065-41a5-8300-146cf5a51536/sudoRoom_360.MP4?v=1722548883635"
-          autoplay
-          loop
-          crossorigin="anonymous"
-          preload="auto"
-        ></video>
-      </a-assets>
-<!--       <a-entity id="loadingScreen" position="0 1.6 -4">
-        <a-text value="Loading..." align="center" color="#000000"></a-text>
-      </a-entity> -->
-      <a-assets>
+         <img
+          id="skyTexture2"
+          src="https://cdn.glitch.global/4f84b3a7-2196-4e68-9b5d-8d8f7c229bc8/KaraWalkerSFMoma360.jpg?v=1722219263454"
+        />
         <img
-         id="skyTexture2"
-         src="https://cdn.glitch.global/4f84b3a7-2196-4e68-9b5d-8d8f7c229bc8/KaraWalkerSFMoma360.jpg?v=1722219263454"
-       />
-       <img
-         id="skyTexture1"
-         src="https://cdn.glitch.global/c70b1072-7801-4a12-b3cf-3bb5e174019e/SudoROom.JPG?v=1722469205013"
-       />
-     </a-assets>
+          id="skyTexture1"
+          src="https://cdn.glitch.global/c70b1072-7801-4a12-b3cf-3bb5e174019e/SudoROom.JPG?v=1722469205013"
+        />
+      </a-assets>
 
-     <a-sky id="skybox" src="#skyTexture1" rotation="0 -100 0"></a-sky>
+      <a-sky id="skybox" src="#skyTexture1" rotation="0 -100 0"></a-sky>
 
+      <a-text
+        font="kelsonsans"
+        value="SudoRoom & Fix-It Clinic"
+        width="6"
+        position="-2.5 1 -1.5"
+        rotation="0 15 0"
+      ></a-text>
 
-      <!-- <a-videosphere src="#360-video" rotation="0 180 0"></a-videosphere> -->
+      <a-entity
+        id="size"
+        position="-2.0 0.5 -1.5"
+        rotation="0 15 0"
+        animation="property: scale; to: 2 2 2; dir: alternate; loop: true"
+        text="color: white; align: center; value: Hardware Hack Night; width: 1.5"
+      >
+      </a-entity>
+
+      <a-entity
+        id="portal"
+        geometry="primitive: circle; radius: 0.5"
+        material="color: blue; opacity: 0.3"
+        position="0 1.5 -3"
+        event-set__enter="_event: mouseenter; material.opacity: 0.8"
+        event-set__leave="_event: mouseleave; material.opacity: 0.5"
+        event-set__click="_event: click; _target: #skybox; src: #skyTexture2"
+      >
+        <a-text
+          value="Stare here to transport"
+          align="center"
+          position="0 0.6 0"
+          scale="0.5 0.5 0.5"
+        ></a-text>
+      </a-entity>
+
+      <a-entity position="0 1.8 2">
+        <a-entity camera look-controls wasd-controls>
+          <a-cursor></a-cursor>
+        </a-entity>
+      </a-entity>
     </a-scene>
   </body>
 </html>

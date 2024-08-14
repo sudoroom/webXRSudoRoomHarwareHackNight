@@ -1,7 +1,7 @@
 AFRAME.registerComponent('pinch-handler', {
     init: function() {
         this.skyboxEl = document.querySelector('#skybox');
-        this.skyboxTextures = ['#skyTexture1', '#skyTexture2'];
+        this.skyboxTextures = ['#skyTexture1', '#skyTexture2', '#skyTexture3'];
         this.currentTextureIndex = 0;
         
         this.el.sceneEl.addEventListener('enter-vr', () => {

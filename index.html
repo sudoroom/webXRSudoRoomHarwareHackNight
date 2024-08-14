@@ -1,41 +1,10 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js">
-      AFRAME.registerComponent('pinch-handler', {
-        init: function() {
-          this.skyboxEl = document.querySelector('#skybox');
-          this.skyboxTextures = ['#skyTexture1', '#skyTexture2', '#skyTexture3']; // Add all your texture IDs here
-          this.currentTextureIndex = 0;
-
-          this.el.sceneEl.addEventListener('enter-vr', () => {
-            const session = this.el.sceneEl.xrSession;
-            if (session) {
-              this.setupEventListeners(session);
-            }
-          });
-        },
-
-        setupEventListeners: function(session) {
-          session.addEventListener('select', this.onSelect.bind(this));
-        },
-
-        onSelect: function(event) {
-          // Check if the input source is a transient-pointer (pinch gesture)
-          if (event.inputSource.targetRayMode === 'transient-pointer') {
-            this.changeSkybox();
-          }
-        },
-
-        changeSkybox: function() {
-          // Move to the next texture
-          this.currentTextureIndex = (this.currentTextureIndex + 1) % this.skyboxTextures.length;
-          const newTexture = this.skyboxTextures[this.currentTextureIndex];
-
-          // Change the skybox texture
-          this.skyboxEl.setAttribute('src', newTexture);
-        }
-      });
     </script>
+         <script src="js/pinch-handler.js"></script>
+         <script src="js/main.js"></script>
+         <link rel="stylesheet" href="css/styles.css">
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
   </head>
   <body>

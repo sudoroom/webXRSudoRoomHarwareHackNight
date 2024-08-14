@@ -23,7 +23,7 @@
 
       <a-sky id="skybox" 
       src="#skyTexture3" 
-      rotation="0 200 0"></a-sky>
+      rotation="0 0 0"></a-sky>
 
       <a-text
         font="kelsonsans"
@@ -47,7 +47,6 @@
         geometry="primitive: circle; radius: 0.5"
         material="color: blue; opacity: 0.5"
         position="0 1.5 -3"
-     
         event-set__enter="_event: mouseenter; material.opacity: 0.8"
         event-set__leave="_event: mouseleave; material.opacity: 0.5"
         event-set__click="_event: click; _target: #skybox; src: #skyTexture2"

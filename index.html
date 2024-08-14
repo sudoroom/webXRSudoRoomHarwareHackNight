@@ -10,9 +10,8 @@
   <body>
     <a-scene pinch-handler>
       <a-assets>
-         <img
-          id="skyTexture2"
-          src="https://cdn.glitch.global/4f84b3a7-2196-4e68-9b5d-8d8f7c229bc8/KaraWalkerSFMoma360.jpg?v=1722219263454"
+         <img id="skyTexture2"
+          src="https://cdn.glitch.global/4f84b3a7-2196-4e68-9b5d-8d8f7c229bc8/KaraWalkerSFMoma360.jpg?v=17222a19263454"
         />
         <img
           id="skyTexture1"
@@ -38,12 +37,13 @@
         text="color: white; align: center; value: Hardware Hack Night; width: 1.5"
       >
       </a-entity>
-
-      <a-entity
+      <a-entity id="portal-group" position="0 1.5 -3">
+        <a-entity
         id="portal"
         geometry="primitive: circle; radius: 0.5"
         material="color: blue; opacity: 0.3"
         position="0 1.5 -3"
+     
         event-set__enter="_event: mouseenter; material.opacity: 0.8"
         event-set__leave="_event: mouseleave; material.opacity: 0.5"
         event-set__click="_event: click; _target: #skybox; src: #skyTexture2"
@@ -54,6 +54,7 @@
           position="0 0.6 0"
           scale="0.5 0.5 0.5"
         ></a-text>
+        </a-entity>
       </a-entity>
 
       <a-entity position="0 1.8 2">
